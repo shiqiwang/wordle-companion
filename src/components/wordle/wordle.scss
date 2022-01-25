@@ -1,0 +1,33 @@
+@import "../../common/color.scss";
+
+.wordle {
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  .letterInput {
+    display: inline-block;
+    margin: 5px;
+    color: $color-tone-7;
+    height: 62px;
+    width: 62px;
+    line-height: 62px;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .focusBox {
+    box-sizing: border-box;
+    border: 1px solid $color-tone-1;
+  }
+
+  .grey {
+    background-color: $color-tone-2;
+  }
+  .yellow {
+    background-color: $color-yellow;
+  }
+  .green {
+    background-color: $color-green;
+  }
+}

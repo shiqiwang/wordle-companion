@@ -1,10 +1,11 @@
 import './App.scss';
-import {Header} from './components';
+import {Header, Wordle} from './components';
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Wordle />
     </div>
   );
 }
