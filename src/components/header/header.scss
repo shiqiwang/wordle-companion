@@ -1,0 +1,12 @@
+@import "../../common/color.scss";
+
+.header {
+  padding: 10px;
+  border-bottom: 1px solid $color-tone-4;
+  .title {
+    color: $color-tone-1;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 0.2rem;
+  }
+}
