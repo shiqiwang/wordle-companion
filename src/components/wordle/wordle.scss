@@ -3,8 +3,11 @@
 .wordle {
   margin: 10px;
   text-align: center;
+  justify-content: center;
   display: flex;
+
   .letterInput {
+    position: relative;
     display: inline-block;
     margin: 5px;
     color: $color-tone-7;
@@ -14,20 +17,41 @@
     font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
-  }
+    border-radius: 2px;
 
-  .focusBox {
-    box-sizing: border-box;
-    border: 1px solid $color-tone-1;
-  }
+    &.focusBox::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      top: -4px;
+      bottom: -4px;
+      border: 2px solid;
+      border-radius: 4px;
+    }
 
-  .grey {
-    background-color: $color-tone-2;
-  }
-  .yellow {
-    background-color: $color-yellow;
-  }
-  .green {
-    background-color: $color-green;
+    &.grey {
+      background-color: $color-tone-2;
+
+      &.focusBox::after {
+        border-color: $color-tone-2;
+      }
+    }
+
+    &.yellow {
+      background-color: $color-yellow;
+
+      &.focusBox::after {
+        border-color: $color-yellow;
+      }
+    }
+
+    &.green {
+      background-color: $color-green;
+
+      &.focusBox::after {
+        border-color: $color-green;
+      }
+    }
   }
 }

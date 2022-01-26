@@ -5,7 +5,7 @@ function Wordle(props) {
 
   const letterStatus = ['grey', 'yellow', 'green'];
   
-  const [values, setValues]=useState([
+  const [word, setWord]=useState([
     {
       letter: '',
       status: 0,
@@ -37,7 +37,7 @@ function Wordle(props) {
     let onKeyPress = event => {
       const {key, keyCode} = event;
       if((keyCode > 64 && keyCode < 91) || (keyCode > 96 && keyCode < 123)) {
-        let copy = [...values];
+        let copy = [...word];
         let currentIndex = 0;
         copy = copy.map((value, index) => {
           if(value.focus) {
@@ -53,7 +53,7 @@ function Wordle(props) {
         })
         currentIndex < copy.length - 1 ? copy[currentIndex + 1].focus = true : copy[0].focus = true;
 
-        setValues(copy);
+        setWord(copy);
       }
     };
 
@@ -62,7 +62,7 @@ function Wordle(props) {
     return () => {
       document.removeEventListener('keypress', onKeyPress);
     }
-  }, [values]);
+  }, [word]);
 
   useEffect(() => {
     let onKeyDown = event => {
@@ -72,7 +72,7 @@ function Wordle(props) {
       }
 
       if(keyCode === 13) {
-        const letters = values.map(item => ({letter: item.letter, status: letterStatus[item.status]}));
+        const letters = word.map(item => ({letter: item.letter, status: letterStatus[item.status]}));
         let result;
         if(letters.filter(item => !item.letter).length) {
           result = false;
@@ -90,7 +90,7 @@ function Wordle(props) {
   })
 
   const onBoxClick = (status, focus, pos) => {
-    setValues(values.map((value, index) => {
+    setWord(word.map((value, index) => {
       if(pos !== index) {
         return {
           ...value,
@@ -114,7 +114,7 @@ function Wordle(props) {
 
   return <div className='wordle'>
     {
-      values.map((value, index) => 
+      word.map((value, index) => 
         <div
           className={`letterInput ${letterStatus[value.status]} ${value.focus ? 'focusBox' : ''}`}
           type='text'
