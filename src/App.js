@@ -2,10 +2,13 @@ import './App.scss';
 import {Header, Wordle} from './components';
 
 function App() {
+  const handleWordle = letters => {
+    console.log(letters);
+  }
   return (
     <div className="App">
       <Header />
-      <Wordle />
+      <Wordle handleWordle={handleWordle}  />
     </div>
   );
 }

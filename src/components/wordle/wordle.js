@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './wordle.scss';
 
-function Wordle() {
+function Wordle(props) {
 
   const letterStatus = ['grey', 'yellow', 'green'];
   
@@ -72,7 +72,14 @@ function Wordle() {
       }
 
       if(keyCode === 13) {
-        console.log('enter')
+        const letters = values.map(item => ({letter: item.letter, status: letterStatus[item.status]}));
+        let result;
+        if(letters.filter(item => !item.letter).length) {
+          result = false;
+        } else {
+          result = letters;
+        }
+        props.handleWordle(result);
       }
     }
     document.addEventListener('keydown', onKeyDown);
