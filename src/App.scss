@@ -1,7 +1,18 @@
+@import "./common/color.scss";
+
 .App {
   text-align: center;
 
   .message {
-    color: red;
+    color: $color-orange;
+  }
+  .candidateList {
+    margin: 0 20px;
+    color: $color-tone-3;
+    font-size: 1.2rem;
+    .candidate {
+      display: inline-block;
+      margin: 2px;
+    }
   }
 }

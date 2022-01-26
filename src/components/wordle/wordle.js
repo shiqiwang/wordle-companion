@@ -67,12 +67,9 @@ function Wordle(props) {
   useEffect(() => {
     let onKeyDown = event => {
       const  {keyCode} = event;
-      if(keyCode === 8) {
-        console.log('delete')
-      }
 
       if(keyCode === 13) {
-        const letters = word.map(item => ({letter: item.letter, status: letterStatus[item.status]}));
+        const letters = word.map(item => ({letter: item.letter.toLowerCase(), status: letterStatus[item.status]}));
         let result;
         if(letters.filter(item => !item.letter).length) {
           result = false;
@@ -112,19 +109,22 @@ function Wordle(props) {
     }));
   }
 
-  return <div className='wordle'>
-    {
-      word.map((value, index) => 
-        <div
-          className={`letterInput ${letterStatus[value.status]} ${value.focus ? 'focusBox' : ''}`}
-          type='text'
-          onClick={() => onBoxClick(value.status, value.focus, index)}
-          key={index}
-        >
-          {value.letter}
-        </div>
-      )
-    }
+  return <div>
+    <div className='line'></div>
+    <div className='wordle'>
+      {
+        word.map((value, index) => 
+          <div
+            className={`letterInput ${letterStatus[value.status]} ${value.focus ? 'focusBox' : ''}`}
+            type='text'
+            onClick={() => onBoxClick(value.status, value.focus, index)}
+            key={index}
+          >
+            {value.letter}
+          </div>
+        )
+      }
+    </div>
   </div>
   
 }
