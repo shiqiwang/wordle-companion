@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import './wordle.scss';
 
 function Wordle(props) {
+
+  const inputRef = useRef();
 
   const letterStatus = ['grey', 'yellow', 'green'];
   
@@ -9,7 +11,7 @@ function Wordle(props) {
     {
       letter: '',
       status: 0,
-      focus: true,
+      focus: false,
     },
     {
       letter: '',
@@ -87,6 +89,11 @@ function Wordle(props) {
   })
 
   const onBoxClick = (status, focus, pos) => {
+    let input = inputRef.current;
+
+    input.value = '';
+    input.focus();
+
     setWord(word.map((value, index) => {
       if(pos !== index) {
         return {
@@ -111,6 +118,7 @@ function Wordle(props) {
 
   return <div>
     <div className='line'></div>
+    <input ref={inputRef} style={{opacity: '0', position: 'absolute'}} value="" />
     <div className='wordle'>
       {
         word.map((value, index) => 
