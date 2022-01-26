@@ -4,11 +4,18 @@
   display: flex;
   text-align: center;
   justify-content: center;
-  margin: 10px;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+
+  &:last-child {
+    margin-bottom: 10px;
+  }
 
   .guess {
     display: inline-block;
-    margin: 5px;
+    margin: 4px;
     color: $color-tone-7;
     height: 62px;
     width: 62px;
@@ -16,6 +23,8 @@
     font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
+    border-radius: 2px;
+
     &.grey {
       background-color: $color-tone-2;
     }

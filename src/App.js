@@ -5,14 +5,10 @@ import allWords from "./common/words.json";
 
 function App() {
   const [words, setWords] = useState([]);
-  const [message, setMessage] = useState("");
 
   const handleWordle = (word) => {
     if (word) {
       setWords([...words, word]);
-      setMessage("");
-    } else {
-      setMessage("The word needs five letters!");
     }
   };
 
@@ -40,13 +36,27 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {words.map((word, index) => (
-        <GuessList key={index} word={word} />
-      ))}
+      <div>
+        {words.map((word, index) => (
+          <GuessList key={index} word={word} />
+        ))}
+      </div>
+      {words.length > 0 && <div className="line"></div>}
       <Wordle handleWordle={handleWordle} />
-      <div className="message">{message}</div>
       <div className="candidateList">
-      {candidates.map((candidate, index) => <div key={index} className="candidate">{candidate}</div>)}
+        {words.length > 0 ? (
+          candidates.map((candidate, index) => (
+            <div key={index} className="candidate">
+              {candidate}
+            </div>
+          ))
+        ) : (
+          <ol className="guide">
+            <li>Type the word you guessed.</li>
+            <li>Toggle a letter by click to match Wordle output.</li>
+            <li>[Enter] to see guess suggestions.</li>
+          </ol>
+        )}
       </div>
     </div>
   );
