@@ -75,6 +75,69 @@ function Wordle(props) {
     let onKeyDown = (event) => {
       const { keyCode } = event;
 
+      if (keyCode === 37) {
+        let copy = [...word];
+        let currentIndex = 0;
+        copy = copy.map((value, index) => {
+          if (value.focus) {
+            currentIndex = index;
+            return {
+              ...value,
+              focus: false,
+            };
+          } else {
+            return value;
+          }
+        });
+        currentIndex > 0
+          ? (copy[currentIndex - 1].focus = true)
+          : (copy[copy.length - 1].focus = true);
+
+        setWord(copy);
+      }
+
+      if (keyCode === 39) {
+        let copy = [...word];
+        let currentIndex = 0;
+        copy = copy.map((value, index) => {
+          if (value.focus) {
+            currentIndex = index;
+            return {
+              ...value,
+              focus: false,
+            };
+          } else {
+            return value;
+          }
+        });
+        currentIndex < copy.length - 1
+          ? (copy[currentIndex + 1].focus = true)
+          : (copy[0].focus = true);
+
+        setWord(copy);
+      }
+
+      if (keyCode === 8) {
+        let copy = [...word];
+        let currentIndex = 0;
+        copy = copy.map((value, index) => {
+          if (value.focus) {
+            currentIndex = index;
+            return {
+              letter: "",
+              status: 0,
+              focus: false,
+            };
+          } else {
+            return value;
+          }
+        });
+        currentIndex > 0
+          ? (copy[currentIndex - 1].focus = true)
+          : (copy[0].focus = true);
+        setWord(copy);
+      }
+
       if (keyCode === 13) {
         const letters = word.map((item) => ({
           letter: item.letter.toLowerCase(),
