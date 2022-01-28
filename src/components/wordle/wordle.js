@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./wordle.scss";
 
-const EMPTY_WORD = (focus = false) => [
+const notMobile = navigator.userAgentData?.mobile === false;
+
+const EMPTY_WORD = (focus = notMobile) => [
   {
     letter: "",
     status: 0,
