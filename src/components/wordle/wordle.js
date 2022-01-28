@@ -42,9 +42,8 @@ function Wordle(props) {
     let onKeyPress = (event) => {
       const { key, keyCode } = event;
       if ((keyCode > 64 && keyCode < 91) || (keyCode > 96 && keyCode < 123)) {
-        let copy = [...word];
         let currentIndex = 0;
-        copy = copy.map((value, index) => {
+        let copy = word.map((value, index) => {
           if (value.focus) {
             currentIndex = index;
             return {
@@ -74,21 +73,22 @@ function Wordle(props) {
   useEffect(() => {
     let onKeyDown = (event) => {
       const { keyCode } = event;
-
-      if (keyCode === 37) {
-        let copy = [...word];
-        let currentIndex = 0;
-        copy = copy.map((value, index) => {
+      let currentIndex = 0;
+      let getNewWord = (newFocusValue) =>
+        word.map((value, index) => {
           if (value.focus) {
             currentIndex = index;
             return {
               ...value,
-              focus: false,
+              ...newFocusValue,
             };
           } else {
             return value;
           }
         });
+
+      if (keyCode === 37) {
+        let copy = getNewWord({ focus: false });
         currentIndex > 0
           ? (copy[currentIndex - 1].focus = true)
           : (copy[copy.length - 1].focus = true);
@@ -97,19 +97,7 @@ function Wordle(props) {
       }
 
       if (keyCode === 39) {
-        let copy = [...word];
-        let currentIndex = 0;
-        copy = copy.map((value, index) => {
-          if (value.focus) {
-            currentIndex = index;
-            return {
-              ...value,
-              focus: false,
-            };
-          } else {
-            return value;
-          }
-        });
+        let copy = getNewWord({ focus: false });
         currentIndex < copy.length - 1
           ? (copy[currentIndex + 1].focus = true)
           : (copy[0].focus = true);
@@ -118,19 +106,10 @@ function Wordle(props) {
       }
 
       if (keyCode === 8) {
-        let copy = [...word];
-        let currentIndex = 0;
-        copy = copy.map((value, index) => {
-          if (value.focus) {
-            currentIndex = index;
-            return {
-              letter: "",
-              status: 0,
-              focus: false,
-            };
-          } else {
-            return value;
-          }
+        let copy = getNewWord({
+          letter: "",
+          status: 0,
+          focus: false,
         });
         currentIndex > 0
           ? (copy[currentIndex - 1].focus = true)
