@@ -130,7 +130,7 @@ function Wordle(props) {
       <input
         ref={inputRef}
         style={{ opacity: "0", position: "absolute" }}
-        value=""
+        defaultValue=""
       />
       <div className="wordle">
         {word.map((value, index) => (

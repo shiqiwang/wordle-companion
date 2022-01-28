@@ -13,10 +13,16 @@ function App() {
   };
 
   const filters = words.flatMap((word) => {
+    const rightLetterSet = new Set(
+      word
+        .filter(({ status }) => status === "yellow" || status === "green")
+        .map(({ letter }) => letter)
+    );
     return word.map(({ letter, status }, index) => {
       switch (status) {
         case "grey":
-          return (input) => !input.includes(letter);
+          return (input) =>
+            rightLetterSet.has(letter) || !input.includes(letter);
         case "yellow":
           return (input) => input.includes(letter) && input[index] !== letter;
         case "green":
